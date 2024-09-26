@@ -1,0 +1,26 @@
+# Ignore Unity-specific folders
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Logs/
+/UserSettings/
+
+# Ignore auto-generated Visual Studio/MonoDevelop files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# Ignore files created by OS
+.DS_Store
+Thumbs.db
+
