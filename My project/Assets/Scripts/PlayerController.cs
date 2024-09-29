@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public float forwardInput;
 
+    // Wheel Colliders
+    public WheelCollider frontLeftWheelCollider;
+    public WheelCollider frontRightWheelCollider;
+    public WheelCollider rearLeftWheelCollider;
+    public WheelCollider rearRightWheelCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +37,9 @@ public class PlayerController : MonoBehaviour
         // Rotates the car based on horizontal input
         // Vector3.up: rotation axis
         transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime * horizontalInput);
+    
+        frontLeftWheelCollider.motorTorque = 10f * forwardInput;
+        frontRightWheelCollider.motorTorque = 10f * forwardInput;
     }
 
     private void OnMouseDown() {

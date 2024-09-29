@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     // Define three different offsets for three different camera perspectives
     private Vector3 offsetTopDown = new Vector3(0, 15, 0); // Adjust the Y-value to ensure a good top view
     private Vector3 offsetRear = new Vector3(0, 4, -8);    // Standard rear view
-    private Vector3 offsetSide = new Vector3(7, 6, 5);     // Side view
+    private Vector3 offsetSide = new Vector3(4, 4, 4);     // Side view
 
     // Start with the rear view as default
     private Vector3 currentOffset;
