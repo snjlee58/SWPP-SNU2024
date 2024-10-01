@@ -59,9 +59,9 @@
     <UnityVersion>2021.3.42f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets/car_controller.cs" />
     <Compile Include="Assets/Scripts/CameraController.cs" />
     <Compile Include="Assets/Scripts/PlayerController.cs" />
-    <Compile Include="Assets/car_controller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Course Library/_Source_Files/_LICENSE.txt" />

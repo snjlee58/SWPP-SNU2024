@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CarController : MonoBehaviour
 {
@@ -8,56 +9,63 @@ public class CarController : MonoBehaviour
     public Transform[] wheels;
    
     float torque = 500f;
-    float angle = 45;
+    float steerAngle = 45;
 
-    public Vector3 centerOfMassOffset = new Vector3(0, -0.5f, 1);  // Adjust Y value to lower the center of mass
+    private float forwardInput;
+    private float horizontalInput;
+
+    public Vector3 centerOfMassOffset = new Vector3(0, -0.6f, 0);  // Adjust Y value to lower the center of mass
     private Rigidbody rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = rb.centerOfMass + centerOfMassOffset;
+        // rb.centerOfMass = rb.centerOfMass + centerOfMassOffset;
     }
 
-    // Update is called once per frame
     void Update()
     {
         for(int i=0;i<wheel_col.Length;i++)
         {
-            wheel_col[i].motorTorque=Input.GetAxis("Vertical")*torque;
+            forwardInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxis("Horizontal");
+
             if(i==0||i==1)
             {
-                wheel_col[i].steerAngle=Input.GetAxis("Horizontal")*angle;
+                // Apply steer wheel rotation for front wheels only
+                wheel_col[i].steerAngle = horizontalInput * steerAngle;
             }
-            var pos = transform.position;
-            var rot = transform.rotation;
-            wheel_col[i].GetWorldPose(out pos, out rot);
-            wheels[i].position = pos;
-            wheels[i].rotation = rot;
-        }
-        
 
-        if(Input.anyKeyDown) 
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
+            // Check if the player has released Vertical key input
+            if (Mathf.Abs(forwardInput) < 0.1f) 
             {
-                foreach(var i in wheel_col)
-                {
-                    i.brakeTorque=7000;
-                }
+                // Apply brake to gradually stop the car
+                wheel_col[i].brakeTorque = 6000;  // Adjust the brake force as needed
+                wheel_col[i].motorTorque = 0;     // Stop applying motor torque
             }
-            else{   //reset the brake torque when another key is pressed
-                foreach(var i in wheel_col)
-                {
-                    i.brakeTorque=0;
-                }
-                
+            else
+            {
+                // Remove brake torque when moving
+                wheel_col[i].brakeTorque = 0;
+                wheel_col[i].motorTorque = forwardInput * torque;
             }
-        }
 
-        // Visualize the center of mass in the Scene view
-        Debug.Log(rb.worldCenterOfMass);
-        Debug.DrawLine(rb.position, rb.worldCenterOfMass, Color.red);
+            var wheelPosition = transform.position;
+            var wheelRotation = transform.rotation;
+
+            wheel_col[i].GetWorldPose(out wheelPosition, out wheelRotation);
+            wheels[i].position = wheelPosition;
+            wheels[i].rotation = wheelRotation;
+        }
     }
+
+    // TEST
+    // private void OnMouseDown() {
+    //    RestartGame();
+    // }
+    
+    // public void RestartGame()
+    // {
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    // }
 }
