@@ -18,8 +18,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= 2; 
 
@@ -27,12 +26,13 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        // Get L/R key input
+    void Update() {
+        // Get key input for horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, 0);
+        movementDirection.Normalize();
 
-        if (horizontalInput == 0.0f)  {
+        if (isStanding())  {
             // Set idle animation when no movement
             playerAnimator.SetBool("Static_b", true);
             playerAnimator.SetFloat("Speed_f", 0.0f);
@@ -40,10 +40,14 @@ public class PlayerController : MonoBehaviour
             // Set movement animation (walking)
             playerAnimator.SetBool("Static_b", false);
             playerAnimator.SetFloat("Speed_f", 0.3f);
+            
+            // Move player based on horizontal input
+            if (movementDirection != Vector3.zero) {
+                transform.forward = movementDirection;
+            }
+            transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
         }
 
-        // Move player based on horizontal input
-        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * horizontalInput);
 
         // Jump action
         if (Input.GetKeyDown(KeyCode.Space) && isGround) {
@@ -51,20 +55,27 @@ public class PlayerController : MonoBehaviour
             isGround = false;
 
             // Trigger jump animation
-            playerAnimator.SetTrigger("Jump_trig");
+            if (isStanding()) {
+                playerAnimator.SetBool("Jump_b", true);
+            } else {
+                playerAnimator.SetTrigger("Jump_trig");
+            }
         }
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
+    private void OnCollisionEnter(Collision collision) {
         // Stop jump animation
         playerAnimator.SetBool("Jump_b", false);
 
         // Prevent double jump
-        if (collision.gameObject.CompareTag("Ground"))
-        {
+        if (collision.gameObject.CompareTag("Ground")) {
             isGround = true;
         }
+    }
+
+    private bool isStanding() {
+        // Check whether player is standing
+        return horizontalInput == 0.0f;
     }
 }
