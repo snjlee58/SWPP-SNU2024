@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 800.0f;
 
     // Move player
-    private float moveSpeed = 10.0f;
+    private float moveSpeed = 8.0f;
     private float forwardInput;
 
     // Start is called before the first frame update
