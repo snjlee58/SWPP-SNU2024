@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     // Jump action
     private float jumpForce = 800.0f;
 
+    // Move player
+    private float moveSpeed = 10.0f;
+    private float forwardInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        forwardInput = Input.GetAxis("Horizontal");
+
+        // Move player based on horizontal input
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * forwardInput);
+
         // Jump action
         if (Input.GetKeyDown(KeyCode.Space) && isGround) {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
