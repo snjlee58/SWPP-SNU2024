@@ -62,9 +62,10 @@
     <Analyzer Include="/Users/sunnylee/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.4/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/HW3/Scripts/PlayerController.cs" />
-    <Compile Include="Assets/HW3/Scripts/CameraController.cs" />
     <Compile Include="Assets/HW3/Scripts/GameController.cs" />
+    <Compile Include="Assets/HW3/Scripts/Bomb.cs" />
+    <Compile Include="Assets/HW3/Scripts/CameraController.cs" />
+    <Compile Include="Assets/HW3/Scripts/PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/HW3/_Source_Files/Materials/UnlitVertexColour_Alpha.shader" />

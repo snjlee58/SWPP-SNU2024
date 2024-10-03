@@ -24,12 +24,18 @@ public class PlayerController : MonoBehaviour
     // Particle
     public ParticleSystem coinParticle;
 
+    // Audio
+    private AudioSource playerAudio;
+    public AudioClip jumpAudio;
+    public AudioClip coinAudio;
+
     // Start is called before the first frame update
     void Start() {
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= 2; 
 
         playerAnimator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -57,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
         // Jump action
         if (Input.GetKeyDown(KeyCode.Space) && isGround) {
+            // Physics
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGround = false;
 
@@ -68,6 +75,9 @@ public class PlayerController : MonoBehaviour
                 // Moving jump
                 playerAnimator.SetTrigger("Jump_trig");
             }
+
+            // Sound effect
+            playerAudio.PlayOneShot(jumpAudio);
         }
     }
 
@@ -85,6 +95,7 @@ public class PlayerController : MonoBehaviour
             gameController.CoinCollected();
             coinParticle.Play();
             Destroy(collision.gameObject);
+            playerAudio.PlayOneShot(coinAudio);
         }
     }
 

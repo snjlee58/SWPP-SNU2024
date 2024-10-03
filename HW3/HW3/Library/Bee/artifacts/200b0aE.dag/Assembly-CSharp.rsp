@@ -343,6 +343,7 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/HW3/Scripts/Bomb.cs"
 "Assets/HW3/Scripts/CameraController.cs"
 "Assets/HW3/Scripts/GameController.cs"
 "Assets/HW3/Scripts/PlayerController.cs"
