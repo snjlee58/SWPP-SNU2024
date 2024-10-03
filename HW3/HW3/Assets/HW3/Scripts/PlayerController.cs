@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player
     private Rigidbody playerRb;
     private Animator playerAnimator;
 
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
     // Move player
     private float moveSpeed = 8.0f;
     private float horizontalInput;
+
+    // Particle
+    public ParticleSystem coinParticle;
 
     // Start is called before the first frame update
     void Start() {
@@ -48,7 +52,6 @@ public class PlayerController : MonoBehaviour
             transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
         }
 
-
         // Jump action
         if (Input.GetKeyDown(KeyCode.Space) && isGround) {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -56,12 +59,13 @@ public class PlayerController : MonoBehaviour
 
             // Trigger jump animation
             if (isStanding()) {
+                // Standing jump
                 playerAnimator.SetBool("Jump_b", true);
             } else {
+                // Moving jump
                 playerAnimator.SetTrigger("Jump_trig");
             }
         }
-        
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -71,6 +75,12 @@ public class PlayerController : MonoBehaviour
         // Prevent double jump
         if (collision.gameObject.CompareTag("Ground")) {
             isGround = true;
+        }
+
+        // Destroy coin on collision
+        if (collision.gameObject.CompareTag("Money")) {
+            coinParticle.Play();
+            Destroy(collision.gameObject);
         }
     }
 
