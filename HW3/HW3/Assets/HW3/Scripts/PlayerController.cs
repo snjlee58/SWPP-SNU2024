@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // GameController
+    public GameController gameController;
+
     // Player
     private Rigidbody playerRb;
     private Animator playerAnimator;
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
         // Destroy coin on collision
         if (collision.gameObject.CompareTag("Money")) {
+            gameController.CoinCollected();
             coinParticle.Play();
             Destroy(collision.gameObject);
         }
