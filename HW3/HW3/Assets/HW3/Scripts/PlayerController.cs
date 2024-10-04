@@ -90,17 +90,37 @@ public class PlayerController : MonoBehaviour
             isGround = true;
         }
 
-        // Destroy coin on collision
         if (collision.gameObject.CompareTag("Money")) {
+            // Check level up 
             gameController.CoinCollected();
+            
+            // Effects
             coinParticle.Play();
-            Destroy(collision.gameObject);
             playerAudio.PlayOneShot(coinAudio);
+
+            // Destroy coin on collision
+            Destroy(collision.gameObject);
+        } else if (collision.gameObject.CompareTag("Enemy")) {
+            Vector3 playerPosition = transform.position;
+            Vector3 enemyPosition = collision.gameObject.transform.position;
+
+            // Destroy enemy when player jumps on top
+            if (playerPosition.y > enemyPosition.y + 0.5f)  // TODO: Adjust threshold 
+            {
+                Destroy(collision.gameObject);
+            } else {
+                Die();
+            }
         }
     }
 
     private bool isStanding() {
         // Check whether player is standing
         return horizontalInput == 0.0f;
+    }
+
+    public void Die() {
+        playerAnimator.SetBool("Death_b", true);
+        playerAnimator.SetInteger("DeathType_int", 2);
     }
 }

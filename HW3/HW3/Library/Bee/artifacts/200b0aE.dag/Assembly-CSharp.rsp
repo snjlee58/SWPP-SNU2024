@@ -346,6 +346,7 @@
 "Assets/HW3/Scripts/Bomb.cs"
 "Assets/HW3/Scripts/CameraController.cs"
 "Assets/HW3/Scripts/GameController.cs"
+"Assets/HW3/Scripts/MoveForward.cs"
 "Assets/HW3/Scripts/PlayerController.cs"
 "Assets/HW3/Scripts/SpawnManager.cs"
 -langversion:9.0
