@@ -4,56 +4,44 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public ParticleSystem bombParticle;  // Prefab for the particle effect
-
-    // public GameObject player;             // Reference to the player object
-
-    // public float explosionDelay = 5.0f;   // Delay before the bomb explodes
-    // public float spawnInterval = 3.0f;   // Delay before the bomb explodes
-    // // public float explosionRadius = 1.0f;  // Radius in which the player will be affected
-    // public float respawnInterval = 3.0f;     // Delay before the bomb respawns
-    // private Animator playerAnimator;
-
-    // private Vector3 originalPosition;     // Store the original position of the bomb
-    // private Quaternion originalRotation;
+    public ParticleSystem bombParticle;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Store the original position of the bomb
-        // originalPosition = transform.position;
-        // originalRotation = transform.rotation;
-
-         // Get the Animator component from the player
-        // playerAnimator = player.GetComponent<Animator>();
-
-        // Invoke the Explosion method after 'explosionDelay' seconds, and repeat every 'spawnInterval' seconds
-        // InvokeRepeating("Explode", explosionDelay, spawnInterval);
     }
 
     void Update() {
-
     }
 
     // Method to handle the bomb explosion
-    public void Explode()
-    {
-        // Instantiate the explosion particle effect
+    public void Explode() {
+        // Explosion particle effect
         ParticleSystem explosion = Instantiate(bombParticle, transform.position, transform.rotation);
         explosion.Play();
         Destroy(explosion.gameObject, explosion.main.duration + explosion.main.startLifetime.constantMax);
 
-        // Check if the player is within the explosion radius
-        // if (Vector3.Distance(transform.position, player.transform.position) <= explosionRadius)
-        // {
-        //     // Kill the player (you can trigger death animation or destroy the player object)
-        //     // Destroy(player);  // Simple example of destroying the player
-        //     playerAnimator.SetBool("Death_b", true);
-        //     playerAnimator.SetInteger("DeathType_int", 2);
-        //     Debug.Log("Player has been killed by the explosion!");
-        // }
+        // Check for  player within the explosion radius
+        CheckForNearbyPlayer();
 
         // Destroy the bomb after the explosion
-        Destroy(gameObject);  // Remove the bomb object
+        Destroy(gameObject);
+    }
+
+    // Check for player within the explosion radius
+    private void CheckForNearbyPlayer() {
+        // Create a sphere around the bomb's position with the explosion radius
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1.0f);
+
+        foreach (Collider hitCollider in hitColliders) {
+            if (hitCollider.CompareTag("Player")) {
+                // Player death animation
+                Animator playerAnimator = hitCollider.gameObject.GetComponent<Animator>();
+                if (playerAnimator != null) {
+                    playerAnimator.SetBool("Death_b", true);
+                    playerAnimator.SetInteger("DeathType_int", 2);
+                }
+            }
+        }
     }
 }
