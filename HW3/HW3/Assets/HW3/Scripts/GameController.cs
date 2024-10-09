@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     {
         collectedCoins++;
 
-        if (collectedCoins >= 3)
+        if (collectedCoins >= 8)
         {
             // Move barrier up if all coins are collected
             StartCoroutine(MoveBarrierUp());
