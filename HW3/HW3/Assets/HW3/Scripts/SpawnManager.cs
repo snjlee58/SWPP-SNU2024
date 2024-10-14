@@ -7,9 +7,10 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] bombs;
     private Vector3[] bombPositions;
     private Quaternion[] bombRotations;
-    public GameObject bombPrefab; // For respawning bombs
-    private float respawnDelay = 3.0f;
-    private int bombIndex;
+    public GameObject bombPrefab; 
+    private float respawnDelay = 2.0f;
+    private bool explodeEvenGroup = true; // To alternate between even and odd explosions
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,9 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
+        // Start alternating explosions
         if (bombs.Length > 0) {
-            InvokeRepeating("ExplodeRandomBomb", 2.0f, respawnDelay + 2.0f);
+            InvokeRepeating("ExplodeGroup", 3.0f, respawnDelay + 3.0f);
         }
     }
 
@@ -34,21 +36,39 @@ public class SpawnManager : MonoBehaviour
     {     
     }
 
-    void ExplodeRandomBomb() {
-        bombIndex = Random.Range(0, bombs.Length);
-        GameObject selectedBomb = bombs[bombIndex];
+    // Function to alternate between exploding even and odd bombs
+    void ExplodeGroup() {
+        if (explodeEvenGroup) {
+            ExplodeBombs(true);
+        } else {
+            ExplodeBombs(false); 
+        }
 
-        if (selectedBomb != null) {
-            Bomb bombScript = selectedBomb.GetComponent<Bomb>();
-            bombScript.Explode();
+        explodeEvenGroup = !explodeEvenGroup;
+    }
 
-            Invoke("RespawnBomb", respawnDelay);
+    // Function to explode bombs based on even/odd indices
+    void ExplodeBombs(bool isEven)
+    {
+        for (int i = 0; i < bombs.Length; i++) {
+            // Check if it's an even or odd bomb based on the index
+            if (isEven && i % 2 == 0 || !isEven && i % 2 != 0) {
+                GameObject selectedBomb = bombs[i];
+                if (selectedBomb != null) {
+                    Bomb bombScript = selectedBomb.GetComponent<Bomb>();
+                    bombScript.Explode();
+
+                    // Respawn bomb after delay
+                    StartCoroutine(RespawnBomb(i));
+                }
+            }
         }
     }
-    void RespawnBomb()
-    {
-        // Instantiate a new bomb at the original position
-        GameObject newBomb = Instantiate(bombPrefab, bombPositions[bombIndex], bombRotations[bombIndex]);
-        bombs[bombIndex] = newBomb;
+
+    // Coroutine to respawn the bomb after a delay
+    IEnumerator RespawnBomb(int index) {
+        yield return new WaitForSeconds(respawnDelay);
+        GameObject newBomb = Instantiate(bombPrefab, bombPositions[index], bombRotations[index]);
+        bombs[index] = newBomb;
     }
 }

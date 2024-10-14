@@ -347,6 +347,7 @@
 "Assets/HW3/Scripts/CameraController.cs"
 "Assets/HW3/Scripts/DestroyOutofBounds.cs"
 "Assets/HW3/Scripts/GameController.cs"
+"Assets/HW3/Scripts/InfiniteBackground.cs"
 "Assets/HW3/Scripts/MoveForward.cs"
 "Assets/HW3/Scripts/PlayerController.cs"
 "Assets/HW3/Scripts/ProjectileMoveForward.cs"
