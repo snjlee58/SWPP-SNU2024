@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Enemy
   - Wall
+  - Twig
   layers:
   - Default
   - TransparentFX

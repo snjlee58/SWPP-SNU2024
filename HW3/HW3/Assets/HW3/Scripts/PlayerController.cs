@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpAudio;
     public AudioClip coinAudio;
 
+    // Wood stick projectile object (used for removing animals in stage 4)
+    public GameObject projectilePrefab;
+
     // Start is called before the first frame update
     void Start() {
         playerRb = GetComponent<Rigidbody>();
@@ -78,6 +81,11 @@ public class PlayerController : MonoBehaviour
 
             // Sound effect
             playerAudio.PlayOneShot(jumpAudio);
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            // Launch a weapon (rock)
+            Instantiate(projectilePrefab, transform.position + new Vector3(1, 1, 0), transform.rotation);
         }
     }
 
