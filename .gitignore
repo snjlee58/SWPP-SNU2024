@@ -1,0 +1,90 @@
+Submission/
+
+# This .gitignore file should be placed at the root of your Unity project directory
+
+# Ignore auto-generated Visual Studio/MonoDevelop/JetBrains Rider project files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+*.pidb.meta
+
+# Unity build folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Asset meta files should not be ignored
+!Assets/**/*.meta
+
+# Ignore crash reports and log files
+CrashReports/
+*.stacktrace
+
+# Ignore the auto-generated Plugin files
+[Pp]lugins/*/Managed/*.*
+
+# Ignore Unity Cache
+[Tt]extureCache/
+
+# Ignore Unity auto-generated file for tracking the current scene when building player
+BuildPlayer.prefs
+
+# Ignore Unity burst compiler files
+BurstCache/
+
+# Ignore Unity Cloud Build files
+[Uu]nityCloudBuild/
+
+# Ignore Gradle cache (Android builds)
+.gradle/
+
+# Ignore Xcode project files (iOS builds)
+exportedXcodeProject/
+*.xcworkspace
+*.xcuserdata/
+*.xcodeproj/
+*.xcconfig
+
+# Ignore Packed Addressables
+[Pp]ackedAssets/
+
+# Ignore local files specific to your OS
+# Windows
+[Dd]esktop.ini
+[Tt]humbs.db
+*.DS_Store
+*.log
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Unix
+.nfs*
+
+# Ignore JetBrains Rider workspace
+.idea/
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore the Unity3D Generated and auto-updated folders
+/Assets/StreamingAssets/UnityShaderCompiler/`
+
+# Ignore Collaborate files
+/[Cc]ollab/

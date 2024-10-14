@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpAudio;
     public AudioClip coinAudio;
 
-    // Wood stick projectile object (used for removing animals in stage 4)
+    // Projectile object (used for removing animals in stage 4)
     public GameObject projectilePrefab;
 
     // Start is called before the first frame update
@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        // Stop jump animation
-        playerAnimator.SetBool("Jump_b", false);
+            // Stop jump animation
+            playerAnimator.SetBool("Jump_b", false);
 
         // Prevent double jump
         if (collision.gameObject.CompareTag("Ground")) {
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             Vector3 enemyPosition = collision.gameObject.transform.position;
 
             // Destroy enemy when player jumps on top
-            if (playerPosition.y > enemyPosition.y + 0.5f)  // TODO: Adjust threshold 
+            if (playerPosition.y > enemyPosition.y + 1.0f) 
             {
                 Destroy(collision.gameObject);
             } else {
