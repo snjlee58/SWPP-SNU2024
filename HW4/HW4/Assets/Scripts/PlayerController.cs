@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject projectilePrefab;
     private Transform shootPoint;
-    private float detectionRange = 10f;
+    private float detectionRange = 6.0f;
     private GameObject currentTarget;
 
     // Start is called before the first frame update
