@@ -7,9 +7,21 @@ using UnityEngine.UI;
 public class GameSceneManager : MonoBehaviour
 {
     public Button startButton;
+    public Button upgradeButton;
+
     public StageManager stageManager; // Reference to StageManager
+    UIManager uiManager;
     private bool isStageActive = false;
     private bool isPaused = false;
+
+    private int money = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        uiManager = transform.Find("UIManager").GetComponent<UIManager>();
+        upgradeButton.gameObject.SetActive(false);
+    }
     
     // Start Stage Button
     /*
@@ -67,10 +79,29 @@ public class GameSceneManager : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    // Method to add money
+    public void AddMoney() {
+        money++;
+        uiManager.UpdateMoney(money);
 
+        // Show upgrade button if money reaches 3
+        if (money >= 3) {
+            upgradeButton.gameObject.SetActive(true);
+        }
+    }
+
+    // Method to handle upgrade button click
+    public void UpgradePlayer()
+    {
+        if (money >= 3) {
+            money -= 3;
+            upgradeButton.gameObject.SetActive(false);
+
+            // Here, you could change the player prefab or any other upgrades
+            Debug.Log("Player Upgraded!"); // DEBUG
+
+            // Implement your upgrade logic here (e.g., change player prefab)
+        }
     }
 
     // Update is called once per frame

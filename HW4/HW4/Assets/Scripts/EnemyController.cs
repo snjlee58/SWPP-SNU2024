@@ -8,9 +8,7 @@ public class EnemyController : MonoBehaviour
     private Animator enemyAnimator;
 
     public int health = 3;
-    public StageManager stageManager; // Reference to StageManager
-    // public UpgradeController upgradeController;
-
+    public StageManager stageManager;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +31,12 @@ public class EnemyController : MonoBehaviour
     }
 
     void Die() {
-        // upgradeController.money += 1;
+        // Notify StageManager of enemy death
+        if (stageManager != null) {
+            stageManager.OnEnemyDeath(); 
+        }
+
+        // Destroy enemy object
         Destroy(gameObject);
-        // stageManager.CheckForStageCompletion();
     }
 }

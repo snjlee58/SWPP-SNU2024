@@ -31,8 +31,14 @@ public class StageManager : MonoBehaviour
         isSpawningWave = true;
 
         for (int i = 0; i < wave.enemyCount; i++) {
-            Instantiate(wave.enemyPrefab, spawnPoints[i], wave.enemyPrefab.transform.rotation);
-            
+            // Instantiate enemy
+            GameObject enemy = Instantiate(wave.enemyPrefab, spawnPoints[i], wave.enemyPrefab.transform.rotation);
+            // Set reference to StageManager in EnemyController
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController != null) {
+                enemyController.stageManager = this;
+            }
+
             yield return new WaitForSeconds(wave.spawnDelay); // Wait before spawning the next enemy
         }
 
@@ -41,6 +47,11 @@ public class StageManager : MonoBehaviour
 
         // After spawning all enemies in this wave, check for completion
         StartCoroutine(CheckWaveCompletion(wave));
+    }
+    public void OnEnemyDeath() {
+        if (gameSceneManager != null) {
+            gameSceneManager.AddMoney();
+        }
     }
 
     private IEnumerator CheckWaveCompletion(Wave wave) {

@@ -9,10 +9,16 @@ public class UIManager : MonoBehaviour
     StageManager stageManager;
 
     public TextMeshProUGUI stageText;
+    public TextMeshProUGUI moneyText;
 
     public void UpdateStage(int _stage) {
         stageText.text = "Stage: " + _stage;
     }
+
+    public void UpdateMoney(int _money) {
+        moneyText.text = "Money: " + _money;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
