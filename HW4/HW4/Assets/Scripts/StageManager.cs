@@ -5,6 +5,7 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public GameSceneManager gameSceneManager; // Reference to GameSceneManager
+    public UIManager uiManager;
     public List<Wave> waves;
     private int currentWaveIndex = 0;
     private bool isSpawningWave = false;
@@ -51,6 +52,7 @@ public class StageManager : MonoBehaviour
         if (gameSceneManager != null) {
             Debug.Log("Stage completed!"); // DEBUG
             gameSceneManager.EndStage();
+            uiManager.UpdateStage(currentWaveIndex+1); // Update stage number in UI
         }
     }
 }
