@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     private Animator enemyAnimator;
 
     public int health = 3;
+    public StageManager stageManager; // Reference to StageManager
     // public UpgradeController upgradeController;
 
 
@@ -34,5 +35,6 @@ public class EnemyController : MonoBehaviour
     void Die() {
         // upgradeController.money += 1;
         Destroy(gameObject);
+        // stageManager.CheckForStageCompletion();
     }
 }
