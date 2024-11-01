@@ -2387,6 +2387,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 25.265, y: 180, z: 0}
+--- !u!1 &1649796333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 119940, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
+  m_PrefabInstance: {fileID: 1999358186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1649796336
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649796333}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.56088, y: 16.412579, z: 19.466002}
+  m_Center: {x: 0.0000013245477, y: 7.7062855, z: 1.3813142}
+--- !u!54 &1649796337
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649796333}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1689518416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,6 +2707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal_Chicken_Brown
       objectReference: {fileID: 0}
+    - target: {fileID: 119940, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
+      propertyPath: m_TagString
+      value: Goal
+      objectReference: {fileID: 0}
     - target: {fileID: 496984, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2687,7 +2725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496984, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 496984, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
       propertyPath: m_LocalRotation.w

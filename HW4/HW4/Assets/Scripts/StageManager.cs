@@ -57,7 +57,7 @@ public class StageManager : MonoBehaviour
     private IEnumerator CheckWaveCompletion(Wave wave) {
         // Wait until all enemies in the wave are defeated
         while (!wave.AllEnemiesDefeated()) {
-            yield return new WaitForSeconds(1f); // Check every second
+            yield return new WaitForSeconds(0.01f); // Check every second
         }
 
         if (currentWaveIndex >= waves.Count)

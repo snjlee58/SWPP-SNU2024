@@ -39,4 +39,14 @@ public class EnemyController : MonoBehaviour
         // Destroy enemy object
         Destroy(gameObject);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the enemy collides with the chicken
+        if (other.CompareTag("Goal"))
+        {
+            // Destroy the chicken
+            Destroy(other.gameObject);
+        }
+    }
 }
