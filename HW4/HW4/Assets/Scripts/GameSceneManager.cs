@@ -76,7 +76,7 @@ public class GameSceneManager : MonoBehaviour
     }
 
     public void RestartGame() {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Method to add money
