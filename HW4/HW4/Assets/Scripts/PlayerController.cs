@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject projectilePrefab;
     private float detectionRange = 7.0f;
+    private List<GameObject> enemyQueue = new List<GameObject>();
     private GameObject currentTarget = null;
 
     public float fireRate = 0.1f; // Time in seconds between each shot
@@ -15,36 +16,45 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
      void Start()
     {
-        InvokeRepeating("DetectEnemiesInRange", 0f, 0.05f); // Check for enemies within range
     }
 
     void Update() {
+        ContinuousEnemyDetection();
+        ManageTargetAndFiring();
+
         if (currentTarget) {
-            LookAtTarget(); // Ensure the Farmer looks at the target
+            LookAtTarget();
         }
     }
 
-    void DetectEnemiesInRange() {
-        if (currentTarget == null) // Only look for new targets if there is no current target
+     void ContinuousEnemyDetection()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange);
+
+        foreach (Collider hit in hits)
         {
-            Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange);
-            foreach (Collider hit in hits)
+            if (hit.CompareTag("Enemy") && !enemyQueue.Contains(hit.gameObject))
             {
-                if (hit.CompareTag("Enemy"))
-                {
-                    currentTarget = hit.gameObject;
-                    StartThrowingProjectiles();
-                    break; // Target the first enemy found
-                }
+                enemyQueue.Add(hit.gameObject);
             }
-        } 
-        else {
-             // Check if the current target is still alive
-            if (!currentTarget.activeInHierarchy) // Check if the enemy is destroyed or inactive
-            {
-                StopThrowingProjectiles();
-                currentTarget = null;
-            }
+        }
+    }
+
+    void ManageTargetAndFiring()
+    {
+        // If there is no current target, select the next one in the queue
+        if (currentTarget == null && enemyQueue.Count > 0)
+        {
+            currentTarget = enemyQueue[0];
+            enemyQueue.RemoveAt(0);
+            StartThrowingProjectiles();
+        }
+
+        // If the current target is destroyed, stop firing and clear the target
+        if (currentTarget != null && !currentTarget.activeInHierarchy)
+        {
+            StopThrowingProjectiles();
+            currentTarget = null;
         }
     }
 
