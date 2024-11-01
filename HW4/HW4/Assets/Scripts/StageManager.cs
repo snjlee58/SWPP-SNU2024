@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public GameSceneManager gameSceneManager; // Reference to GameSceneManager
-    public UIManager uiManager;
+    public UIManager uiManager; // Reference to UIManager
     public List<Wave> waves;
     private int currentWaveIndex = 0;
     private bool isSpawningWave = false;
@@ -58,6 +58,15 @@ public class StageManager : MonoBehaviour
         // Wait until all enemies in the wave are defeated
         while (!wave.AllEnemiesDefeated()) {
             yield return new WaitForSeconds(1f); // Check every second
+        }
+
+        if (currentWaveIndex >= waves.Count)
+        {
+            // All waves are complete, show game clear
+            if (uiManager != null)
+            {
+                uiManager.ShowGameClear();
+            }
         }
 
         if (gameSceneManager != null) {

@@ -39,6 +39,8 @@ public class GameSceneManager : MonoBehaviour
         isStageActive = true;
         startButton.image.color = Color.red;
 
+        upgradeButton.gameObject.SetActive(false);
+
         // Call StartNextStage on StageManager to initiate the stage
         if (stageManager != null) {
             stageManager.StartNextStage();
