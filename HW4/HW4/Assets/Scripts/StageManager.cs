@@ -12,8 +12,8 @@ public class StageManager : MonoBehaviour
     private Vector3[] spawnPoints = new Vector3[]
     {
         new Vector3(-6.0f, 0f, 0.4f),
-        new Vector3(-10f, 1.19f, 0f),
-        new Vector3(-15f, 1.19f, 0f),
+        new Vector3(-7.0f, 0f, 0.4f),
+        new Vector3(-8.0f, 0f, 0.4f),
     };
 
     void Start()

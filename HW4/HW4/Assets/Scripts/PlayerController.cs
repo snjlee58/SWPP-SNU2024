@@ -5,16 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject projectilePrefab;
-    private float detectionRange = 6.0f;
-    private GameObject currentTarget;
+    private float detectionRange = 7.0f;
+    private GameObject currentTarget = null;
 
-    public float fireRate = 0.3f; // Time in seconds between each shot
+    public float fireRate = 0.1f; // Time in seconds between each shot
+    private bool isFiring = false;
 
 
     // Start is called before the first frame update
      void Start()
     {
-        InvokeRepeating("DetectEnemiesInRange", 0f, 0.1f); // Check for enemies within range
+        InvokeRepeating("DetectEnemiesInRange", 0f, 0.05f); // Check for enemies within range
     }
 
     void Update() {
@@ -24,35 +25,44 @@ public class PlayerController : MonoBehaviour
     }
 
     void DetectEnemiesInRange() {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange);
-        foreach (Collider hit in hits)
+        if (currentTarget == null) // Only look for new targets if there is no current target
         {
-            if (hit.CompareTag("Enemy"))
+            Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange);
+            foreach (Collider hit in hits)
             {
-                if (currentTarget == null) // Only start firing if there was no target before
+                if (hit.CompareTag("Enemy"))
                 {
                     currentTarget = hit.gameObject;
                     StartThrowingProjectiles();
+                    break; // Target the first enemy found
                 }
-                return;
             }
-        }
-
-        // If no enemies are detected, stop firing projectiles
-        if (currentTarget != null) {
-            currentTarget = null;
-            StopThrowingProjectiles();
+        } 
+        else {
+             // Check if the current target is still alive
+            if (!currentTarget.activeInHierarchy) // Check if the enemy is destroyed or inactive
+            {
+                StopThrowingProjectiles();
+                currentTarget = null;
+            }
         }
     }
 
     void StartThrowingProjectiles()
     {
-        InvokeRepeating("ThrowProjectile", 0f, fireRate);
+        if (!isFiring) { // Ensure firing starts only once
+            isFiring = true;
+            InvokeRepeating("ThrowProjectile", 0f, fireRate);
+        }
     }
 
     void StopThrowingProjectiles()
     {
-        CancelInvoke("ThrowProjectile");
+        if (isFiring) // Check to ensure firing stops properly
+        {
+            isFiring = false;
+            CancelInvoke("ThrowProjectile");
+        }
     }
 
     void ThrowProjectile()

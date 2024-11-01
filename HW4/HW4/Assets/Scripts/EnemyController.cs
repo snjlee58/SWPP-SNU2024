@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private float speed = 2.0f;
+    private float speed = 1.1f;
     private Animator enemyAnimator;
 
     public int health = 3;
