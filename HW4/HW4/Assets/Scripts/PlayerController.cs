@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator playerAnimator;
     public GameObject projectilePrefab;
     private float detectionRange = 7.0f;
     private List<GameObject> enemyQueue = new List<GameObject>();
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
      void Start()
     {
+        playerAnimator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -90,10 +92,15 @@ public class PlayerController : MonoBehaviour
     void ThrowProjectile()
     {
         if (currentTarget != null) {
+            playerAnimator.speed = 2.0f; 
+            playerAnimator.SetInteger("Animation_int", 3); 
             // Instantiate projectile and set its target
             GameObject projectile = Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
             ProjectileController projectileScript = projectile.GetComponent<ProjectileController>();
             projectileScript.SetTarget(currentTarget);
+
+             // Reset the animation and Animator speed after a short delay
+            StartCoroutine(ResetAnimation());
 
             shotsFired++;
             if (shotsFired >= shotsToFire) // Check number of shots the player has fired
@@ -101,6 +108,12 @@ public class PlayerController : MonoBehaviour
                 StopThrowingProjectiles();
             }
         }
+    }
+
+    IEnumerator ResetAnimation()
+    {
+        yield return new WaitForSeconds(0.05f);
+        playerAnimator.SetInteger("Animation_int", 0); // Reset to idle animation
     }
 
     void LookAtTarget() {
