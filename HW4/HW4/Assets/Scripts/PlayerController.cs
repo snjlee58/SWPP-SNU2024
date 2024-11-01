@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    // Player animator
     private Animator playerAnimator;
-    public GameObject projectilePrefab;
+    private GameObject currentFarmer;
+
+    // Enemy tracking
     private float detectionRange = 7.0f;
     private List<GameObject> enemyQueue = new List<GameObject>();
     private GameObject currentTarget = null;
 
+    // Projectile firing
+    public GameObject projectilePrefab;
     private float fireRate = 0.8f; // Time in seconds between each shot
     private bool isFiring = false;
     private int shotsFired = 0; // Tracks the number of shots fired
     private int shotsToFire = 0; // Number of shots to fire based on enemy's health
 
 
-
     // Start is called before the first frame update
      void Start()
     {
-        playerAnimator = GetComponent<Animator>();
+        // Initialize the animator when the farmer is set
+        if (currentFarmer != null)
+        {
+            playerAnimator = currentFarmer.GetComponent<Animator>();
+        }
     }
 
     void Update() {
@@ -30,6 +39,12 @@ public class PlayerController : MonoBehaviour
         if (currentTarget) {
             LookAtTarget();
         }
+    }
+
+    public void SetCurrentFarmer(GameObject farmer)
+    {
+        currentFarmer = farmer;
+        playerAnimator = currentFarmer.GetComponent<Animator>();
     }
 
      void ContinuousEnemyDetection()
