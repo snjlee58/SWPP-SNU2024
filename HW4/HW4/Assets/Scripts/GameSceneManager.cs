@@ -97,6 +97,9 @@ public class GameSceneManager : MonoBehaviour
             money -= 3;
             upgradeButton.gameObject.SetActive(false);
 
+            // Update money in UI
+            uiManager.UpdateMoney(money);
+
             // Here, you could change the player prefab or any other upgrades
             Debug.Log("Player Upgraded!"); // DEBUG
 

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     // Projectile firing
     public GameObject projectilePrefab;
-    private float fireRate = 0.8f; // Time in seconds between each shot
+    public float fireRate = 0.8f; // Time in seconds between each shot
     private bool isFiring = false;
     private int shotsFired = 0; // Tracks the number of shots fired
     private int shotsToFire = 0; // Number of shots to fire based on enemy's health
