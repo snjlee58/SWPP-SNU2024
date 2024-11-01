@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> enemyQueue = new List<GameObject>();
     private GameObject currentTarget = null;
 
-    public float fireRate = 0.1f; // Time in seconds between each shot
+    private float fireRate = 0.8f; // Time in seconds between each shot
     private bool isFiring = false;
+    private int shotsFired = 0; // Tracks the number of shots fired
+    private int shotsToFire = 0; // Number of shots to fire based on enemy's health
+
 
 
     // Start is called before the first frame update
@@ -30,7 +33,6 @@ public class PlayerController : MonoBehaviour
      void ContinuousEnemyDetection()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange);
-
         foreach (Collider hit in hits)
         {
             if (hit.CompareTag("Enemy") && !enemyQueue.Contains(hit.gameObject))
@@ -47,7 +49,17 @@ public class PlayerController : MonoBehaviour
         {
             currentTarget = enemyQueue[0];
             enemyQueue.RemoveAt(0);
-            StartThrowingProjectiles();
+
+            if (currentTarget != null)
+            {
+                EnemyController enemy = currentTarget.GetComponent<EnemyController>();
+                if (enemy != null)
+                {
+                    shotsToFire = enemy.health; // Set the number of shots based on enemy's health
+                    shotsFired = 0; // Reset shots fired count
+                    StartThrowingProjectiles();
+                }
+            }
         }
 
         // If the current target is destroyed, stop firing and clear the target
@@ -77,11 +89,17 @@ public class PlayerController : MonoBehaviour
 
     void ThrowProjectile()
     {
-        if ( projectilePrefab != null && currentTarget != null) {
+        if (currentTarget != null) {
             // Instantiate projectile and set its target
             GameObject projectile = Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
             ProjectileController projectileScript = projectile.GetComponent<ProjectileController>();
             projectileScript.SetTarget(currentTarget);
+
+            shotsFired++;
+            if (shotsFired >= shotsToFire) // Check number of shots the player has fired
+            {
+                StopThrowingProjectiles();
+            }
         }
     }
 
