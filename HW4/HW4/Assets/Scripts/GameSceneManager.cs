@@ -6,19 +6,20 @@ using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
 {
+    public StageManager stageManager; // Reference to StageManager
+    public PlayerManager playerManager; // Reference to PlayerManager
+    UIManager uiManager;
+
+    // Buttons
     public Button startButton;
     public Button pauseButton;
 
     public Button upgradeButton;
 
-    public StageManager stageManager; // Reference to StageManager
-    public PlayerManager playerManager; // Reference to PlayerManager
-    UIManager uiManager;
-
+    // Variables to track game status
     private bool isGameOver = false;
     private bool isStageActive = false;
     private bool isPaused = false;
-
     private int life = 1;
     private int money = 0;
 
@@ -37,7 +38,7 @@ public class GameSceneManager : MonoBehaviour
         - 스테이지가 끝나면 다시 검은색으로 변하고 재활성화
     */
     public void OnStartButtonPressed() {
-        if (!isStageActive) {
+        if (!isStageActive && !isGameOver) {
             StartStage();
         }
     }
@@ -55,7 +56,9 @@ public class GameSceneManager : MonoBehaviour
 
     public void EndStage() {
         isStageActive = false;
-        startButton.image.color = Color.white;
+        if (startButton != null) {
+            startButton.image.color = Color.white;
+        }
     }
 
     // Pause Button 
@@ -63,12 +66,14 @@ public class GameSceneManager : MonoBehaviour
         - 게임 플레이 중 누르면 게임이 일시정지
         - 게임 오버 상황에서는 눌러도 동작하지 않음
     */
-    public void TogglePause() {
-        if (isPaused) {
-            ResumeGame();
-        }
-        else {
-            PauseGame();
+    public void OnPauseButtonPressed() {
+        if (!isGameOver) {
+            if (isPaused) {
+                ResumeGame();
+            }
+            else {
+                PauseGame();
+            }
         }
     }
 
@@ -115,8 +120,6 @@ public class GameSceneManager : MonoBehaviour
 
             // Here, you could change the player prefab or any other upgrades
             Debug.Log("Player Upgraded!"); // DEBUG
-
-            // Implement your upgrade logic here (e.g., change player prefab)
         }
     }
 
@@ -126,20 +129,12 @@ public class GameSceneManager : MonoBehaviour
 
         isGameOver = true;
 
+        EndStage(); // Turn off Start Button
+
         if (uiManager != null)
         {
             playerManager.OnGameOver();
             uiManager.ShowGameOver();
-        }
-
-        if (startButton != null)
-        {
-            startButton.interactable = false;
-        }
-
-        if (pauseButton != null)
-        {
-            pauseButton.interactable = false;
         }
     }
 
