@@ -8,6 +8,7 @@ public class StageManager : MonoBehaviour
     public UIManager uiManager; // Reference to UIManager
     public List<Wave> waves;
     private int currentWaveIndex = 0;
+    private int enemiesDestroyedInCurrentStage = 0;
     private bool isSpawningWave = false;
     private Vector3[] spawnPoints = new Vector3[]
     {
@@ -22,6 +23,11 @@ public class StageManager : MonoBehaviour
 
     public void StartNextStage() {
         Debug.Log("starting stage" + currentWaveIndex); // DEBUG
+
+        // Reset number of enemies killed
+        enemiesDestroyedInCurrentStage = 0;
+
+        // Start spawning enemies
         if (currentWaveIndex < waves.Count) {
             StartCoroutine(SpawnWave(waves[currentWaveIndex]));
         }
@@ -44,35 +50,44 @@ public class StageManager : MonoBehaviour
 
         isSpawningWave = false;
         currentWaveIndex++; // Move to the next wave
-
-        // After spawning all enemies in this wave, check for completion
-        StartCoroutine(CheckWaveCompletion(wave));
     }
     public void OnEnemyDeath() {
+        Debug.Log("enemy has died"); // DEBUG
+        enemiesDestroyedInCurrentStage++;
+
         if (gameSceneManager != null) {
             gameSceneManager.AddMoney();
         }
+
+        // Check if stage is complete (all enemies destroyed)
+        CheckStageCompletion();
     }
 
-    private IEnumerator CheckWaveCompletion(Wave wave) {
-        // Wait until all enemies in the wave are defeated
-        while (!wave.AllEnemiesDefeated()) {
-            yield return new WaitForSeconds(0.01f); // Check every second
-        }
-
-        if (currentWaveIndex >= waves.Count)
+    private void CheckStageCompletion()
+    {
+        // Check if all enemies in the current wave are defeated
+        if (enemiesDestroyedInCurrentStage >= waves[currentWaveIndex - 1].enemyCount)
         {
-            // All waves are complete, show game clear
-            if (uiManager != null)
+            Debug.Log("all enemies in stage" + (currentWaveIndex-1) + "has died"); // DEBUG
+            if (currentWaveIndex >= waves.Count)
             {
-                uiManager.ShowGameClear();
+                // All waves are complete, show game clear
+                if (uiManager != null)
+                {
+                    uiManager.ShowGameClear();
+                }
+            }
+            else
+            {
+                // The current wave is complete, move to the next stage
+                if (gameSceneManager != null)
+                {
+                    Debug.Log("Stage completed!"); // DEBUG
+                    gameSceneManager.EndStage();
+                    uiManager.UpdateStage(currentWaveIndex + 1); // Update stage number in UI
+                }
             }
         }
-
-        if (gameSceneManager != null) {
-            Debug.Log("Stage completed!"); // DEBUG
-            gameSceneManager.EndStage();
-            uiManager.UpdateStage(currentWaveIndex+1); // Update stage number in UI
-        }
     }
+
 }

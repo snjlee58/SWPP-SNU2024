@@ -19,10 +19,4 @@ public class Wave : MonoBehaviour
     {
         
     }
-
-    public bool AllEnemiesDefeated()
-    {
-        // Check if all enemies in this wave are defeated
-        return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
-    }
 }

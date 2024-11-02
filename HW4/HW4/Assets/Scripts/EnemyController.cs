@@ -31,13 +31,13 @@ public class EnemyController : MonoBehaviour
     }
 
     void Die() {
+        // Destroy enemy object
+        Destroy(gameObject);
+        
         // Notify StageManager of enemy death
         if (stageManager != null) {
             stageManager.OnEnemyDeath(); 
         }
-
-        // Destroy enemy object
-        Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
