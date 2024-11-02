@@ -12,9 +12,9 @@ public class StageManager : MonoBehaviour
     private bool isSpawningWave = false;
     private Vector3[] spawnPoints = new Vector3[]
     {
-        new Vector3(-6.0f, 0f, 0.4f),
-        new Vector3(-7.0f, 0f, 0.4f),
         new Vector3(-8.0f, 0f, 0.4f),
+        new Vector3(-9.0f, 0f, 0.4f),
+        new Vector3(-10.0f, 0f, 0.4f),
     };
 
     void Start()
