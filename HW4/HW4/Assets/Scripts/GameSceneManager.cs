@@ -100,7 +100,7 @@ public class GameSceneManager : MonoBehaviour
         uiManager.UpdateMoney(money);
 
         // Show upgrade button if money reaches 3
-        if (money >= 3) {
+        if (!playerManager.isUpgraded && money >= 3) {
             upgradeButton.gameObject.SetActive(true);
         }
     }
