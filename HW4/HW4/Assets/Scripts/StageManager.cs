@@ -22,8 +22,6 @@ public class StageManager : MonoBehaviour
     }
 
     public void StartNextStage() {
-        Debug.Log("starting stage" + currentWaveIndex); // DEBUG
-
         // Reset number of enemies killed
         enemiesDestroyedInCurrentStage = 0;
 
@@ -52,7 +50,6 @@ public class StageManager : MonoBehaviour
         currentWaveIndex++; // Move to the next wave
     }
     public void OnEnemyDeath() {
-        Debug.Log("enemy has died"); // DEBUG
         enemiesDestroyedInCurrentStage++;
 
         if (gameSceneManager != null) {
@@ -68,7 +65,6 @@ public class StageManager : MonoBehaviour
         // Check if all enemies in the current wave are defeated
         if (enemiesDestroyedInCurrentStage >= waves[currentWaveIndex - 1].enemyCount)
         {
-            Debug.Log("all enemies in stage" + (currentWaveIndex-1) + "has died"); // DEBUG
             if (currentWaveIndex >= waves.Count)
             {
                 // All waves are complete, show game clear
@@ -82,7 +78,6 @@ public class StageManager : MonoBehaviour
                 // The current wave is complete, move to the next stage
                 if (gameSceneManager != null)
                 {
-                    Debug.Log("Stage completed!"); // DEBUG
                     gameSceneManager.EndStage();
                     uiManager.UpdateStage(currentWaveIndex + 1); // Update stage number in UI
                 }

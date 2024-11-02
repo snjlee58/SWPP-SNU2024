@@ -116,9 +116,6 @@ public class GameSceneManager : MonoBehaviour
             uiManager.UpdateMoney(money);
 
             playerManager.UpgradeFarmer();
-
-            // Here, you could change the player prefab or any other upgrades
-            Debug.Log("Player Upgraded!"); // DEBUG
         }
     }
 

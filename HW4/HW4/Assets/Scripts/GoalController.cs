@@ -32,9 +32,6 @@ public class GoalController : MonoBehaviour
 
             // Destroy the chicken (goal) object
             Destroy(gameObject);
-
-            // Optionally, you can also destroy the enemy that collided with the chicken
-            // Destroy(other.gameObject);
         }
     }
 }
