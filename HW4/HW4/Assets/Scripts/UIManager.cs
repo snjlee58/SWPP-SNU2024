@@ -31,12 +31,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOver() {
         gameOverText.gameObject.SetActive(true);
-        upgradeButton.gameObject.SetActive(false);
     }
 
     public void ShowGameClear() {
         gameClearText.gameObject.SetActive(true);
-        upgradeButton.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update

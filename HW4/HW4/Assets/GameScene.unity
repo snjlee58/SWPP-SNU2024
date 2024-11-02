@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &106530538
 RectTransform:
   m_ObjectHideFlags: 0
@@ -382,18 +382,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2065296308}
         m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
         m_MethodName: UpgradePlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1320621679}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: UpgradeFarmer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2289,6 +2277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalFarmerPrefab: {fileID: 2465426090571098427, guid: 92a2eb166669547208d7bc9c5d2c1816, type: 3}
   upgradedFarmerPrefab: {fileID: 5641123174103653283, guid: 150e8c9ceec22478ba1afbf21866bc62, type: 3}
+  isUpgraded: 0
 --- !u!4 &1320621680
 Transform:
   m_ObjectHideFlags: 0
@@ -2817,11 +2806,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc7d739f9eb04c1b90d8e6c619fd328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageManager: {fileID: 1689518418}
+  playerManager: {fileID: 1320621679}
   startButton: {fileID: 1092495826}
   pauseButton: {fileID: 538426195}
   upgradeButton: {fileID: 106530541}
-  stageManager: {fileID: 1689518418}
-  playerManager: {fileID: 1320621679}
 --- !u!1 &2089897985
 GameObject:
   m_ObjectHideFlags: 0

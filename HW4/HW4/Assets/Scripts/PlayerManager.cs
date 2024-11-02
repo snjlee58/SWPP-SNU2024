@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject upgradedFarmerPrefab;
     private GameObject currentFarmer;
 
+    public bool isUpgraded = false;
+
     private Vector3 spawnPosition = new Vector3(1.50f, 0f, -3.38f);
 
     private PlayerController playerController; // Reference to the PlayerController script
@@ -35,6 +37,8 @@ public class PlayerManager : MonoBehaviour
             // Update the PlayerController reference and pass the new farmer
             playerController = currentFarmer.GetComponent<PlayerController>();
             playerController.SetCurrentFarmer(currentFarmer);
+
+            isUpgraded = true;
         }
     }
 

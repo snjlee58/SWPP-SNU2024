@@ -27,7 +27,6 @@ public class GameSceneManager : MonoBehaviour
     void Start()
     {
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
-        upgradeButton.gameObject.SetActive(false);
     }
     
     // Start Stage Button
@@ -45,8 +44,6 @@ public class GameSceneManager : MonoBehaviour
     public void StartStage() {
         isStageActive = true;
         startButton.image.color = Color.red;
-
-        upgradeButton.gameObject.SetActive(false);
 
         // Call StartNextStage on StageManager to initiate the stage
         if (stageManager != null) {
@@ -111,12 +108,14 @@ public class GameSceneManager : MonoBehaviour
     // Method to handle upgrade button click
     public void UpgradePlayer()
     {
-        if (money >= 3) {
+        if (!isGameOver && money >= 3 && !playerManager.isUpgraded) {
             money -= 3;
             upgradeButton.gameObject.SetActive(false);
 
             // Update money in UI
             uiManager.UpdateMoney(money);
+
+            playerManager.UpgradeFarmer();
 
             // Here, you could change the player prefab or any other upgrades
             Debug.Log("Player Upgraded!"); // DEBUG
