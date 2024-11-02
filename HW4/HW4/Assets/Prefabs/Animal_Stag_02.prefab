@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f400477531b804582ba82ffc70ca3e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 7
+  health: 12
   stageManager: {fileID: 0}
 --- !u!1 &8241605866185733116
 GameObject:

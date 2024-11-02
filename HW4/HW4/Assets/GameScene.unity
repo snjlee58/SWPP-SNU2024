@@ -2421,6 +2421,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1649796340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649796333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa7e1f8523534368990b3a0725e1fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSceneManager: {fileID: 2065296308}
 --- !u!1 &1689518416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 119940, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
       propertyPath: m_Name
-      value: Animal_Chicken_Brown
+      value: Goal
       objectReference: {fileID: 0}
     - target: {fileID: 119940, guid: 49b874b9460c6754c829d7cb541a99db, type: 3}
       propertyPath: m_TagString
@@ -2804,6 +2817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 1092495826}
+  pauseButton: {fileID: 538426195}
   upgradeButton: {fileID: 106530541}
   stageManager: {fileID: 1689518418}
 --- !u!1 &2089897985
