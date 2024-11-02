@@ -12,6 +12,7 @@ public class GameSceneManager : MonoBehaviour
     public Button upgradeButton;
 
     public StageManager stageManager; // Reference to StageManager
+    public PlayerManager playerManager; // Reference to PlayerManager
     UIManager uiManager;
 
     private bool isGameOver = false;
@@ -127,6 +128,7 @@ public class GameSceneManager : MonoBehaviour
 
         if (uiManager != null)
         {
+            playerManager.OnGameOver();
             uiManager.ShowGameOver();
         }
 

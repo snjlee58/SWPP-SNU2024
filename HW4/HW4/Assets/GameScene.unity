@@ -2821,6 +2821,7 @@ MonoBehaviour:
   pauseButton: {fileID: 538426195}
   upgradeButton: {fileID: 106530541}
   stageManager: {fileID: 1689518418}
+  playerManager: {fileID: 1320621679}
 --- !u!1 &2089897985
 GameObject:
   m_ObjectHideFlags: 0

@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void StopThrowingProjectiles()
+    public void StopThrowingProjectiles()
     {
         if (isFiring) // Check to ensure firing stops properly
         {

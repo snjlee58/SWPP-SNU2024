@@ -38,6 +38,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void OnGameOver() {
+        playerController.StopThrowingProjectiles();
+    }
+
     // Update is called once per frame
     void Update()
     {
