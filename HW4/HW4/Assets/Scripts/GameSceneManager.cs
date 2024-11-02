@@ -7,10 +7,14 @@ using UnityEngine.UI;
 public class GameSceneManager : MonoBehaviour
 {
     public Button startButton;
+    public Button pauseButton;
+    
     public Button upgradeButton;
 
     public StageManager stageManager; // Reference to StageManager
     UIManager uiManager;
+
+    private bool isGameOver = false;
     private bool isStageActive = false;
     private bool isPaused = false;
 
@@ -106,6 +110,28 @@ public class GameSceneManager : MonoBehaviour
             Debug.Log("Player Upgraded!"); // DEBUG
 
             // Implement your upgrade logic here (e.g., change player prefab)
+        }
+    }
+
+    public void GameOver()
+    {
+        if (isGameOver) return; // Prevent repeated game-over logic
+
+        isGameOver = true;
+
+        if (uiManager != null)
+        {
+            uiManager.ShowGameOver();
+        }
+
+        if (startButton != null)
+        {
+            startButton.interactable = false;
+        }
+
+        if (pauseButton != null)
+        {
+            pauseButton.interactable = false;
         }
     }
 
