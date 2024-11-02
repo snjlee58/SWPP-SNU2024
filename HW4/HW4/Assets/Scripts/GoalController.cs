@@ -27,6 +27,7 @@ public class GoalController : MonoBehaviour
             // Trigger Game Over
             if (gameSceneManager != null)
             {
+                gameSceneManager.LoseLife();
                 gameSceneManager.GameOver();
             }
 

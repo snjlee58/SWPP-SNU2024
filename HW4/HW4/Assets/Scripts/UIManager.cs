@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     StageManager stageManager;
 
     public TextMeshProUGUI stageText;
+    public TextMeshProUGUI lifeText;
     public TextMeshProUGUI moneyText;
 
     public TextMeshProUGUI gameOverText;
@@ -18,6 +19,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStage(int _stage) {
         stageText.text = "Stage: " + _stage;
+    }
+
+    public void UpdateLife(int _life) {
+        lifeText.text = "Life: " + _life;
     }
 
     public void UpdateMoney(int _money) {

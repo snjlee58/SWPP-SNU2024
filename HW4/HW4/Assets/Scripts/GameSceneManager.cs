@@ -8,7 +8,7 @@ public class GameSceneManager : MonoBehaviour
 {
     public Button startButton;
     public Button pauseButton;
-    
+
     public Button upgradeButton;
 
     public StageManager stageManager; // Reference to StageManager
@@ -18,6 +18,7 @@ public class GameSceneManager : MonoBehaviour
     private bool isStageActive = false;
     private bool isPaused = false;
 
+    private int life = 1;
     private int money = 0;
 
     // Start is called before the first frame update
@@ -83,6 +84,11 @@ public class GameSceneManager : MonoBehaviour
 
     public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoseLife() {
+        life--;
+        uiManager.UpdateLife(life);
     }
 
     // Method to add money
