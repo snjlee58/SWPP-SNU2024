@@ -1,7 +1,7 @@
 # SNU Software Development Principles and Practice (SWPP) Assignments 2024-2
 SNU CSE M1522.001800 Software Development Principles and Practice (소프트웨어 개발의 원리와 실습) by Prof. Jungdam Won (원정담 교수님) in 2024 Fall Semester.
 
-All Unity scripts are written in C++.
+All Unity scripts are written in C#.
 
 ## Assignment Scores
 - HW1 (Blender): 100/100
