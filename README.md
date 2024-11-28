@@ -7,4 +7,4 @@ All Unity scripts are written in C#.
 - HW1 (Blender): 100/100
 - HW2 (Unity #1: Kart Racing Game): 100/100
 - HW2 (Unity #2: Platformer Game): 100/100
-- HW3 (Unity #3: Tower Defense Game): TBD
+- HW3 (Unity #3: Tower Defense Game): 100/100
